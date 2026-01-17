@@ -1,0 +1,157 @@
+:root {
+  --brand: #9A3C37;
+  --accent: #D6A34A;
+  --cream: #F6F4F2;
+  --midchar: #121212;
+  --brownline: #8B5E4A;
+}
+
+/* ---------------------------
+   Global Styles
+---------------------------- */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--cream);
+  color: var(--midchar);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ---------------------------
+   FloatingFrames shimmer animation
+---------------------------- */
+@keyframes glimmerMove {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* -------------------------------------
+   BENTO FEATURES GRID (BentoFeatures.jsx)
+-------------------------------------- */
+.bento-section h2 {
+  color: var(--midchar);
+  font-weight: 600;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 160px;
+  gap: 1.5rem;
+  grid-template-areas:
+    "precision matte steel"
+    "secure returns satisfaction";
+}
+
+/* Tile size layout areas */
+.bento-tile.large {
+  grid-area: precision;
+}
+
+.bento-tile.small {
+  grid-auto-rows: 140px;
+}
+
+.bento-tile.tall {
+  grid-area: steel;
+  grid-row: span 2;
+  min-height: 320px;
+}
+
+.bento-tile.wide {
+  grid-area: secure;
+  grid-column: 1 / span 2;
+  min-height: 160px;
+}
+
+/* -------------------------------------
+   RESPONSIVE BENTO GRID REBUILD
+-------------------------------------- */
+
+/* Desktop: 4‑column custom layout */
+@media (min-width: 1025px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 160px;
+    grid-template-areas:
+      "precision precision matte steel"
+      "secure secure matte steel"
+      "returns satisfaction satisfaction steel";
+  }
+
+  .bento-tile.large {
+    grid-area: precision;
+  }
+
+  .bento-tile.small {
+    grid-auto-rows: 140px;
+  }
+
+  .bento-tile.tall {
+    grid-area: steel;
+    grid-row: span 3;
+    min-height: 100%;
+  }
+
+  .bento-tile.wide {
+    grid-area: secure;
+  }
+}
+
+/* Tablet: 2‑column optimized layout */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+    grid-template-areas:
+      "precision matte"
+      "steel steel"
+      "secure secure"
+      "returns satisfaction";
+  }
+
+  .bento-tile.large {
+    grid-area: precision;
+  }
+
+  .bento-tile.tall {
+    grid-area: steel;
+    grid-row: span 2;
+  }
+
+  .bento-tile.wide {
+    grid-area: secure;
+  }
+}
+
+/* Mobile: Full‑width stacked */
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas: none;
+  }
+
+  .bento-tile {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    min-height: auto;
+  }
+}
+
+/* Helper styles */
+.bento-tile p {
+  margin: 0;
+}
