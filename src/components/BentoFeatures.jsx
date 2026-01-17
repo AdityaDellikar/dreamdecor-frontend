@@ -175,7 +175,7 @@ function Tile({ item, index }) {
   return (
     <motion.div
       ref={ref}
-      className={`bento-tile group
+      className={`bento-tile group 
   ${item.id === 'precision' ? 'col-start-1 col-end-7 row-start-1' : ''}
   ${item.id === 'matte' ? 'col-start-7 col-end-13 row-start-1' : ''}
   ${item.id === 'secure' ? 'col-start-1 col-end-10 row-start-2' : ''}
@@ -252,7 +252,7 @@ export default function BentoFeatures() {
       <div className="container mx-auto px-6" ref={wrapperRef}>
         <h2 className="text-2xl font-semibold mb-8">Our Features & Guarantees</h2>
 
-        <div className="bento-grid grid gap-6 grid-cols-12 grid-rows-[repeat(4,auto)] auto-rows-[160px]">
+        <div className="bento-grid grid gap-6 grid-cols-1 md:grid-cols-12 grid-rows-[repeat(4,auto)] auto-rows-[160px]">
           {/* Using CSS grid areas via classes to create bento-like layout */}
           {FEATURES.map((f, i) => (
             <Tile key={f.id} item={f} index={i} />

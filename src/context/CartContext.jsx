@@ -35,8 +35,7 @@ export const CartProvider = ({ children }) => {
           (p._id ?? p.id) === id ? { ...p, qty: (p.qty || 1) + qty } : p
         );
       } else {
-        const rawImage =
-          product.images?.[0] || product.image || "";
+        const rawImage = String(product.images?.[0] || product.image || "");
 
         const primaryImage = rawImage.startsWith("http")
           ? rawImage
