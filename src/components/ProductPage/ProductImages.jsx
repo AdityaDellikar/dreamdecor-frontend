@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import ReactImageMagnify from "react-image-magnify";
+import { motion } from "framer-motion";
 
 export default function ProductImages({ images = [], name }) {
   // Normalize image objects
@@ -17,6 +17,7 @@ export default function ProductImages({ images = [], name }) {
 
   const [selectedImage, setSelectedImage] = useState("");
   const [isMobile, setIsMobile] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (normalizedImages.length > 0) {
@@ -47,33 +48,18 @@ export default function ProductImages({ images = [], name }) {
     <div className="flex flex-col items-center">
       {/* Main image */}
       <div className="w-full max-w-md aspect-square flex items-center justify-center">
-        {isMobile ? (
-          <img
+        <motion.div
+          className="w-full h-full overflow-hidden rounded-xl cursor-zoom-in"
+          onClick={() => isMobile && setShowModal(true)}
+        >
+          <motion.img
             src={selectedImage}
             alt={name}
-            className="w-full h-full object-cover rounded-xl"
+            className="w-full h-full object-cover"
+            whileHover={!isMobile ? { scale: 1.12 } : {}}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           />
-        ) : (
-          <ReactImageMagnify
-            {...{
-              smallImage: {
-                alt: name,
-                isFluidWidth: true,
-                src: selectedImage,
-              },
-              largeImage: {
-                src: selectedImage,
-                width: 1200,
-                height: 1200,
-              },
-              enlargedImageContainerDimensions: {
-                width: "150%",
-                height: "150%",
-              },
-              lensStyle: { backgroundColor: "rgba(0,0,0,.2)" },
-            }}
-          />
-        )}
+        </motion.div>
       </div>
 
       {/* Thumbnails */}
@@ -106,6 +92,18 @@ export default function ProductImages({ images = [], name }) {
           </button>
         ))}
       </div>
+      {showModal && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center"
+          onClick={() => setShowModal(false)}
+        >
+          <img
+            src={selectedImage}
+            alt={name}
+            className="max-h-[90vh] max-w-[90vw] object-contain"
+          />
+        </div>
+      )}
     </div>
   );
 }
