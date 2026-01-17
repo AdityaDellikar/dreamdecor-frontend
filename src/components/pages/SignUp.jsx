@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import api from "../../api/apiClient";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -11,6 +13,9 @@ export default function SignUp() {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,9 +29,18 @@ export default function SignUp() {
     try {
       const response = await api.post("/auth/register", form);
 
-      toast.success("Signup successful! You can now log in.");
+      toast.success("Signup successful! You are now logged in.");
 
-      setSuccess(response.data.message || "Signup successful!");
+      // Assuming response.data contains user and token
+      const { user, token, message } = response.data;
+
+      // Login the user in AuthContext
+      auth.login(user, token);
+
+      setSuccess(message || "Signup successful!");
+
+      // Navigate to home or dashboard page after login
+      navigate("/");
     } catch (err) {
       const msg = err.response?.data?.message || "Signup failed";
 

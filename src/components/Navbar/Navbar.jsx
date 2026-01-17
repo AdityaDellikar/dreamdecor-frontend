@@ -326,12 +326,12 @@ export default function Navbar() {
 
         {/* Menu */}
         <div className="px-6 pt-8 space-y-8 text-xl font-medium text-black">
-          <div onClick={() => setMobileOpen(false) || navigate("/")}>Home</div>
-          <div onClick={() => setMobileOpen(false) || navigate("/products")}>Products</div>
-          <div onClick={() => setMobileOpen(false) || navigate("/favourites")}>Favourites</div>
-          <div onClick={() => setMobileOpen(false) || navigate("/cart")}>Cart</div>
-          <div onClick={() => setMobileOpen(false) || navigate("/about")}>About</div>
-          <div onClick={() => setMobileOpen(false) || navigate("/mailus")}>Contact</div>
+          <div onClick={() => { setMobileOpen(false); navigate("/"); }}>Home</div>
+          <div onClick={() => { setMobileOpen(false); navigate("/products"); }}>Products</div>
+          <div onClick={() => { setMobileOpen(false); navigate("/favourites"); }}>Favourites</div>
+          <div onClick={() => { setMobileOpen(false); navigate("/cart"); }}>Cart</div>
+          <div onClick={() => { setMobileOpen(false); navigate("/about"); }}>About</div>
+          <div onClick={() => { setMobileOpen(false); navigate("/mailus"); }}>Contact</div>
         </div>
       </motion.div>
     )}
